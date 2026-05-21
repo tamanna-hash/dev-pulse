@@ -1,6 +1,6 @@
 import dotenv from "dotenv";
 
-dotenv.config();
+dotenv.config({ quiet: true });
 
 const config =  {
   CONNECTION_STRING: process.env.CONNECTION_STRING,

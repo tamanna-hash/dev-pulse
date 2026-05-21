@@ -1,7 +1,7 @@
 import { Pool } from "pg";
 import config from "../config";
 
-const pool = new Pool({ connectionString: config.CONNECTION_STRING });
+export const pool = new Pool({ connectionString: config.CONNECTION_STRING });
 const initDB = async () => {
   await pool.query(`
             CREATE TABLE IF NOT EXISTS users(
@@ -9,7 +9,7 @@ const initDB = async () => {
                 name VARCHAR(20) NOT NULL,
                 email VARCHAR(30) UNIQUE NOT NULL,
                 password TEXT NOT NULL,
-                role VARCHAR(10) DEFAULT 'contributor',
+                role VARCHAR(20) DEFAULT 'contributor',
                 
                 created_at TIMESTAMP DEFAULT NOW(),
                 updated_at TIMESTAMP DEFAULT NOW()
