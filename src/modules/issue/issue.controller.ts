@@ -3,6 +3,7 @@ import sendResponse from "../../utility/sendResponse";
 import { issueService } from "./issue.service";
 import type { Query } from "../../type";
 import type { JwtPayload } from "jsonwebtoken";
+import type { IUser } from "../auth/auth.interface";
 
 // create issue
 const createIssue = async (req: Request, res: Response) => {
@@ -84,7 +85,7 @@ const updateIssue = async (req: Request, res: Response) => {
   try {
     const issueId = Number(req.params.id);
 
-    const user = req.user;
+    const user = req.user!;
 
     const result = await issueService.updateIssueIntoDB(
       issueId,

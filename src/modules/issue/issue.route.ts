@@ -13,6 +13,6 @@ router.post(
 router.get("/", issueController.getIssues);
 router.get('/:id',issueController.getSingleIssue)
 router.put("/:id", auth(), issueController.updateIssue);
-router.delete("/:id", issueController.deleteIssue);
+router.delete("/:id",auth(), issueController.deleteIssue);
 
 export const issueRoute = router;

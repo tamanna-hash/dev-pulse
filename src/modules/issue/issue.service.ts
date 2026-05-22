@@ -1,6 +1,7 @@
 import { pool } from "../../db";
 import type { Query } from "../../type";
-import type { ICreateIssue, IIssue, IUpdateIssue } from "./issue.interface";
+import type { IUser } from "../auth/auth.interface";
+import type { ICreateIssue, IIssue, IUpdateIssue, TJwtPayload } from "./issue.interface";
 
 const createIssueIntoDB = async (payload: ICreateIssue) => {
   const { title, description, type, status, reporter_id } = payload;
@@ -140,10 +141,7 @@ const getSingleIssueFromDB = async (issueId: number) => {
 const updateIssueIntoDB = async (
   issueId: number,
   payload: IUpdateIssue,
-  user: {
-    id: number;
-    role: "contributor" | "maintainer";
-  },
+  user: TJwtPayload
 ) => {
   // 1. check issue exists
   const issueResult = await pool.query(
@@ -205,10 +203,7 @@ const updateIssueIntoDB = async (
 
 const deleteIssueFromDB = async (
   issueId: number,
-  user: {
-    id: number;
-    role: "contributor" | "maintainer";
-  },
+  user: TJwtPayload
 ) => {
   // only maintainer can delete
   if (user.role !== "maintainer") {

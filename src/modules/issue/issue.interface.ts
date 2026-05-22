@@ -1,5 +1,4 @@
-export interface IIssue{
-   
+export interface IIssue {
   id: number;
   title: string;
   description: string;
@@ -18,7 +17,12 @@ export interface ICreateIssue {
 }
 
 export interface IUpdateIssue {
-    title?: string;
-    description?: string;
-    type?: "bug" | "feature_request";
-  }
+  title?: string;
+  description?: string;
+  type?: "bug" | "feature_request";
+}
+export interface TJwtPayload {
+  id: number;
+  email: string;
+  role: "contributor" | "maintainer";
+}
