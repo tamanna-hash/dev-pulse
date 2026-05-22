@@ -2,8 +2,6 @@ import type { Request, Response } from "express";
 import sendResponse from "../../utility/sendResponse";
 import { issueService } from "./issue.service";
 import type { Query } from "../../type";
-import type { JwtPayload } from "jsonwebtoken";
-import type { IUser } from "../auth/auth.interface";
 
 // create issue
 const createIssue = async (req: Request, res: Response) => {
