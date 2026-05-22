@@ -21,8 +21,8 @@ export interface IUpdateIssue {
   description?: string;
   type?: "bug" | "feature_request";
 }
-export interface TJwtPayload {
-  id: number;
-  email: string;
-  role: "contributor" | "maintainer";
-}
+// export interface TJwtPayload {
+//   id: number;
+//   email: string;
+//   role: "contributor" | "maintainer";
+// }

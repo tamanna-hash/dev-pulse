@@ -10,7 +10,7 @@ The project follows a modular architecture pattern for scalability and maintaina
 ## Live URL
 
 ```txt id="6p9x9v"
-
+https://dev-pulse-sable.vercel.app
 ```
 
 ---
@@ -18,7 +18,7 @@ The project follows a modular architecture pattern for scalability and maintaina
 # Features
 
 * User Authentication with JWT
-* Access & Refresh Token support
+* Access Token support
 * Password hashing using bcryptjs
 * Role-based authorization
 * Create, Update, Delete, and Fetch Issues

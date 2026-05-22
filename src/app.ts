@@ -3,12 +3,13 @@ import cors from "cors"
 import { authRoute } from "./modules/auth/auth.route"
 import { issueRoute } from "./modules/issue/issue.route"
 import globalErrorHandler from "./middleware/globalErrorHandler"
+import config from "./config"
 const app:Application = express()
 app.use(express.json())
 app.use(express.text())
 app.use(express.urlencoded({extended:true}))
 app.use(cors({
-    origin: 'http://localhost:5000/',
+    origin: config.ORIGIN,
 }))
 app.use('/api/auth',authRoute)
 app.use('/api/issues',issueRoute)

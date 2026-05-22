@@ -1,8 +1,9 @@
+import type { JwtPayload } from "jsonwebtoken";
 import { pool } from "../../db";
 import type { Query } from "../../type";
-import type { IUser } from "../auth/auth.interface";
-import type { ICreateIssue, IIssue, IUpdateIssue, TJwtPayload } from "./issue.interface";
+import type { ICreateIssue, IIssue, IUpdateIssue } from "./issue.interface";
 
+// create issue into DB
 const createIssueIntoDB = async (payload: ICreateIssue) => {
   const { title, description, type, status, reporter_id } = payload;
 
@@ -28,7 +29,7 @@ const createIssueIntoDB = async (payload: ICreateIssue) => {
 
   return result.rows[0];
 };
-
+// get issues  from DB
 const getIssuesFromDB = async (query: Query) => {
   const { sort = "newest", type, status } = query;
 
@@ -97,7 +98,7 @@ const getIssuesFromDB = async (query: Query) => {
 
   return issuesWithReporter;
 };
-
+// get single issue  from DB
 const getSingleIssueFromDB = async (issueId: number) => {
   // get issue
   const issueResult = await pool.query(
@@ -137,11 +138,11 @@ const getSingleIssueFromDB = async (issueId: number) => {
     updated_at: issue.updated_at,
   };
 };
-
+// update issue into DB
 const updateIssueIntoDB = async (
   issueId: number,
   payload: IUpdateIssue,
-  user: TJwtPayload
+  user: JwtPayload,
 ) => {
   // 1. check issue exists
   const issueResult = await pool.query(
@@ -200,11 +201,8 @@ const updateIssueIntoDB = async (
 
   return result.rows[0];
 };
-
-const deleteIssueFromDB = async (
-  issueId: number,
-  user: TJwtPayload
-) => {
+// delete issue from DB
+const deleteIssueFromDB = async (issueId: number, user: JwtPayload) => {
   // only maintainer can delete
   if (user.role !== "maintainer") {
     throw new Error("You are not authorized to delete issues");
