@@ -19,11 +19,15 @@ const initDB = async () => {
       CREATE TABLE IF NOT EXISTS issues(
          id SERIAL PRIMARY KEY,
          title VARCHAR(150) NOT NULL,
+
          description TEXT NOT NULL
-         CHECK (LENGTH(description) >=20),
-         type TEXT,
+          CHECK (LENGTH(description) >=20),
+
+         type TEXT NOT NULL,
+
          status VARCHAR(20) DEFAULT 'open',
-         reporter_id INT UNIQUE REFERENCES users(id) ON DELETE CASCADE,
+
+         reporter_id INT REFERENCES users(id) ON DELETE CASCADE,
 
          created_at TIMESTAMP DEFAULT NOW(),
          updated_at TIMESTAMP DEFAULT NOW()

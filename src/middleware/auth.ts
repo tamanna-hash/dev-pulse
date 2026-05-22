@@ -4,7 +4,7 @@ import config from "../config";
 import jwt, { type JwtPayload } from "jsonwebtoken";
 import { pool } from "../db";
 import type { Roles } from "../type";
-export const auth = (...roles:Roles[]) => {
+export const auth = (...roles: Roles[]) => {
   return async (req: Request, res: Response, next: NextFunction) => {
     try {
       const token = req.headers.authorization;
@@ -38,21 +38,15 @@ export const auth = (...roles:Roles[]) => {
         });
       }
 
-      if (!user?.is_active) {
-        sendResponse(res, {
-          statusCode: 402,
-          success: false,
-          message: "Forbidden",
-        });
-      }
       req.user = decoded;
 
-      //   if (roles.length && !roles.includes(user.role)) {
-      //     res.status(403).json({
-      //       success: false,
-      //       message: "forbidden, who the hell r u bro? U should keep distance.",
-      //     });
-      //   }
+      if (roles.length && !roles.includes(user.role)) {
+        sendResponse(res, {
+          statusCode: 403,
+          success: false,
+          message: "Access forbidden",
+        });
+      }
 
       next();
     } catch (error) {

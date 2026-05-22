@@ -44,14 +44,13 @@ const loginUserIntoDB = async (payload: {
     [email],
   );
 
-  if (userData.rows.length == 0) {
+  if (userData.rows.length === 0) {
     throw new Error("Invalid Credentials");
   }
   const user = userData.rows[0];
-  const matchedPassword = bcrypt.compare(password, user.password);
-
+  const matchedPassword = await bcrypt.compare(password, user.password);
   if (!matchedPassword) {
-    throw new Error("Invalid Credentials ");
+    throw new Error("Invalid Credentials");
   }
 
   const jwtPayload: UserPayload = {
@@ -75,7 +74,8 @@ const loginUserIntoDB = async (payload: {
   //     expiresIn: "7d",
   //   },
   // );
-  return { "token":accessToken,user };
+  delete user.password;
+  return { token: accessToken, user };
 };
 
 export const authService = {
