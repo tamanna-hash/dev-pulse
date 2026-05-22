@@ -16,3 +16,9 @@ export interface ICreateIssue {
   status?: "open" | "in_progress" | "resolved";
   reporter_id: number;
 }
+
+export interface IUpdateIssue {
+    title?: string;
+    description?: string;
+    type?: "bug" | "feature_request";
+  }

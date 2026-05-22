@@ -1,7 +1,7 @@
 import express, { type Application, type Request, type Response } from "express"
 import cors from "cors"
 import { authRoute } from "./modules/auth/auth.route"
-import { issueRoute } from "./modules/issue/issueRoute"
+import { issueRoute } from "./modules/issue/issue.route"
 const app:Application = express()
 app.use(express.json())
 app.use(express.text())

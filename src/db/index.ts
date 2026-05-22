@@ -7,8 +7,11 @@ const initDB = async () => {
             CREATE TABLE IF NOT EXISTS users(
                 id SERIAL PRIMARY KEY,
                 name VARCHAR(20) NOT NULL,
+
                 email VARCHAR(30) UNIQUE NOT NULL,
+
                 password TEXT NOT NULL,
+                
                 role VARCHAR(20) DEFAULT 'contributor',
                 
                 created_at TIMESTAMP DEFAULT NOW(),
