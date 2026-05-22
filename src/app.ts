@@ -17,7 +17,7 @@ app.use(globalErrorHandler)
 
 app.get('/',(req:Request,res:Response)=>{
     res.status(200).json({
-        "message":"u just landed on the landing route",
+        "message":"You just landed on the landing route",
     })
 })
 export default app;
